@@ -67,6 +67,49 @@ class Btree{
       cout<<"\t"<<temp->data;
       display(temp->right);                
 }
+   
+     //to search a node
+node* searchNode(int dt)
+{
+ int count =0;
+ node * check = root;
+ if(check == NULL)
+     return NULL;
+ else
+  while(true)
+  {
+   if(check->data == dt)
+   {
+	cout << "\nNode found at depth " << count <<".\n";
+	display(check);
+	return check;
+   }
+   else if(check->data > dt)
+   {
+    if(check->left == NULL)	
+	{
+	 cout << "\nNOT FOUND.\n";
+	 return NULL;
+	}
+    else
+	check = check->left;
+   }
+   else
+   {
+    if(check->right == NULL)
+	{
+ 	 cout << "\nNOT FOUND.\n";
+	 return NULL;
+	}
+    else
+	check = check->right;
+   }
+   
+   count++;
+  }
+}
+
+    
 
 };     
 
@@ -76,19 +119,23 @@ int main(){
  cout<<"\nMENU";
  cout<<"\n1.INSERT";
  cout<<"\n2.DISPLAY";
+ cout<<"\n3.SEARCH";    
  cout<<"\nEXIT";
  
 int ch,x;
 do{
-  cout<<"\nenter your choice (1-3): ";
+  cout<<"\nenter your choice (1-4): ";
   cin>>ch;
   switch(ch){
   case 1:cout<<"\nenter the data you want to enter :";
          cin>>x;
          b.insert(x);break;
   case 2:b.display(b.root);break;
-  deafult:cout<<"\ntype 1,2 or 3 ";break;
+  case 3:cout<<"\nenter the data you want to search :";
+         cin>>x;
+         b.searchNode(x);break;          
+  deafult:cout<<"\ntype 1,2,3 or 4 ";break;
   }
-}while(ch!=3);
+}while(ch!=4);
 return 0;
 }
