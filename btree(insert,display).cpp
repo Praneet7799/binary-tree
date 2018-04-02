@@ -108,6 +108,100 @@ node* searchNode(int dt)
    count++;
   }
 }
+	
+	//To search an element
+	
+node* searchNode(int x)
+{ while(src!=NULL)
+{if(x==src->data) 
+	  return src; 
+  else if(x<src->data)  
+    src=src->left;
+   else
+    src=src->right;
+}
+ cout<<"Node not found";
+}
+	
+	//To delete a node
+void deletenode(node*temp,int s)
+{
+  
+  if(search(temp,s)!=NULL)
+  {  
+    node*curr=search(temp,s);
+    cout<<curr->data;
+    // if this is leaf node
+    if(curr->left==NULL && curr->right==NULL)
+    { 
+      if(curr->parent->left==curr)
+        curr->parent->left=NULL;
+      else
+         curr->parent->right=NULL;
+    }
+    // if node has only one child
+    else if(curr->left==NULL || curr->right==NULL)
+    { 
+      if(curr!=root)
+      {
+        node* p;
+        node* c;
+        p=curr->parent; 
+        if(curr->left==NULL)
+        c=curr->right;
+        else
+        c=curr->left;
+        if(p->data>=curr->data)
+        {
+          p->left=c;
+          c->parent=p;
+        }
+        else
+        {
+         p->right=c;
+         c->parent=p;
+        }
+       }
+       else
+       {
+         if(curr->left==NULL)
+          root=curr->right;
+         else
+          root=curr->left;
+       }
+    }
+    // node has at most 2 child
+    else
+    {
+      node*l;
+      l=curr->left;
+      while(l->right!=NULL)
+      {
+        l=l->right;
+      }
+      if(l->left==NULL)
+      {
+       curr->data=l->data;
+       node* p=l->parent;
+       if(p->left==l)
+        p->left=NULL;
+       else
+        p->right=NULL;
+      }
+      else
+      {
+        curr->data=l->data;
+        node* p=l->parent;
+        if(p->left==l)
+        p->left=l->left;
+        else
+        p->right=l->left;
+      }
+    }
+  }
+}
+
+	
 
     
 
@@ -119,8 +213,9 @@ int main(){
  cout<<"\nMENU";
  cout<<"\n1.INSERT";
  cout<<"\n2.DISPLAY";
- cout<<"\n3.SEARCH";    
- cout<<"\nEXIT";
+ cout<<"\n3.SEARCH";  
+ cout<<"\n4.DELETE";
+ cout<<"\n5.EXIT";
  
 int ch,x;
 do{
@@ -133,9 +228,12 @@ do{
   case 2:b.display(b.root);break;
   case 3:cout<<"\nenter the data you want to search :";
          cin>>x;
-         b.searchNode(x);break;          
+         b.searchNode(x);break;  
+case 3:cout<<"\nenter the data you want to delete :";
+         cin>>x;
+         b.deleteNode(b.root,x);break;
   deafult:cout<<"\ntype 1,2,3 or 4 ";break;
   }
-}while(ch!=4);
+}while(ch!=5);
 return 0;
 }
