@@ -81,43 +81,43 @@ node* searchNode(int dt)
   {
    if(check->data == dt)
    {
-	cout << "\nNode found at depth " << count <<".\n";
-	display(check);
-	return check;
+  cout << "\nNode found at depth " << count <<".\n";
+  display(check);
+  return check;
    }
    else if(check->data > dt)
    {
-    if(check->left == NULL)	
-	{
-	 cout << "\nNOT FOUND.\n";
-	 return NULL;
-	}
+    if(check->left == NULL)  
+  {
+   cout << "\nNOT FOUND.\n";
+   return NULL;
+  }
     else
-	check = check->left;
+  check = check->left;
    }
    else
    {
     if(check->right == NULL)
-	{
- 	 cout << "\nNOT FOUND.\n";
-	 return NULL;
-	}
+  {
+    cout << "\nNOT FOUND.\n";
+   return NULL;
+  }
     else
-	check = check->right;
+  check = check->right;
    }
    
    count++;
   }
 }
-	
-	
-	//To delete a node
-void deletenode(node*temp,int s)
+  
+  
+  //To delete a node
+void deleteNode(node*temp,int s)
 {
   
-  if(search(temp,s)!=NULL)
+  if(searchNode(s)!=NULL)
   {  
-    node*curr=searchNode(temp,s);
+    node*curr=searchNode(s);
     cout<<curr->data;
     // if this is leaf node
     if(curr->left==NULL && curr->right==NULL)
@@ -189,7 +189,7 @@ void deletenode(node*temp,int s)
   }
 }
 
-	
+  
 
     
 
@@ -217,7 +217,7 @@ do{
   case 3:cout<<"\nenter the data you want to search :";
          cin>>x;
          b.searchNode(x);break;  
-case 3:cout<<"\nenter the data you want to delete :";
+case 4:cout<<"\nenter the data you want to delete :";
          cin>>x;
          b.deleteNode(b.root,x);break;
   deafult:cout<<"\ntype 1,2,3 or 4 ";break;
@@ -225,3 +225,4 @@ case 3:cout<<"\nenter the data you want to delete :";
 }while(ch!=5);
 return 0;
 }
+
