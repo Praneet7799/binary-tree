@@ -65,7 +65,8 @@ class Btree{
          return;
       display(temp->left);
       cout<<"\t"<<temp->data;
-      display(temp->right);                
+      display(temp->right); 
+      cout<<"\t"<<temp->data;
 }
    
      //to search a node
@@ -109,19 +110,6 @@ node* searchNode(int dt)
   }
 }
 	
-	//To search an element
-	
-node* searchNode(int x)
-{ while(src!=NULL)
-{if(x==src->data) 
-	  return src; 
-  else if(x<src->data)  
-    src=src->left;
-   else
-    src=src->right;
-}
- cout<<"Node not found";
-}
 	
 	//To delete a node
 void deletenode(node*temp,int s)
@@ -129,7 +117,7 @@ void deletenode(node*temp,int s)
   
   if(search(temp,s)!=NULL)
   {  
-    node*curr=search(temp,s);
+    node*curr=searchNode(temp,s);
     cout<<curr->data;
     // if this is leaf node
     if(curr->left==NULL && curr->right==NULL)
